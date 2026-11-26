@@ -23,6 +23,10 @@ class Article extends Model
 
     public function getImageUrlAttribute(): ?string
     {
-        return $this->image ? asset('storage/' . $this->image) : null;
+        if (!$this->image) {
+            return null;
+        }
+
+        return url('/api/media/' . $this->image);
     }
 }
